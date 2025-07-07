@@ -56,15 +56,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_641EB35D8C254F6DA194CA58F0DEBE43 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_372C4401C57945C2944CB4141C29E64D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4AF1015D36DF4BF0A45E53649A4BD0AF }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A0AA25BCC13740CABEFD667CB2C3B84B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_83BF75BDAC184F338CA74D9EF5B5754D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F44DEFB1E0A94CF28F4F8F66B5E95B35 }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'system-sales-backend'
+          app-name: 'bodeguita-backend'
           slot-name: 'Production'
           package: .
 
