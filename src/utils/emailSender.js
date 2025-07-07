@@ -13,9 +13,17 @@ const enviarCorreoRecuperacion = async (email, token) => {
     senderAddress: SENDER_EMAIL,
     content: {
       subject: 'Recupera tu contraseña',
-      html: `<p>Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-             <a href="${resetUrl}">${resetUrl}</a>
-             <p>Este enlace expirará en 1 hora.</p>`
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto; border: 1px solid #eee; border-radius: 8px; padding: 24px; background: #fafbfc;">
+          <h2 style="color: #e4572e; margin-top: 0;">Recuperación de contraseña</h2>
+          <p style="font-size: 16px;">Hemos recibido una solicitud para restablecer tu contraseña.</p>
+          <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background: #e4572e; color: #fff; border-radius: 4px; text-decoration: none; font-weight: bold; margin: 16px 0;">Restablecer contraseña</a>
+          <p style="font-size: 14px; color: #555;">Si no solicitaste este cambio, puedes ignorar este correo.</p>
+          <p style="font-size: 14px; color: #555;">O copia y pega este enlace en tu navegador:</p>
+          <p style="word-break: break-all; font-size: 13px;"><a href="${resetUrl}">${resetUrl}</a></p>
+          <p style="color: #888; font-size: 12px;">Este enlace expirará en 1 hora.</p>
+        </div>
+      `
     },
     recipients: {
       to: [{ address: email }]
@@ -35,10 +43,16 @@ const enviarCorreoVerificacion = async (email, nombre, token) => {
     senderAddress: SENDER_EMAIL,
     content: {
       subject: 'Verifica tu cuenta',
-      html: `<p>Hola ${nombre},</p>
-             <p>Gracias por registrarte. Para activar tu cuenta, haz clic en el siguiente enlace:</p>
-             <a href="${verifyUrl}">${verifyUrl}</a>
-             <p>Este enlace es válido por tiempo limitado.</p>`
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto; border: 1px solid #eee; border-radius: 8px; padding: 24px; background: #fafbfc;">
+          <h2 style="color: #2d7ff9; margin-top: 0;">¡Bienvenido, ${nombre}!</h2>
+          <p style="font-size: 16px;">Gracias por registrarte. Para activar tu cuenta, haz clic en el botón de abajo:</p>
+          <a href="${verifyUrl}" style="display: inline-block; padding: 12px 24px; background: #2d7ff9; color: #fff; border-radius: 4px; text-decoration: none; font-weight: bold; margin: 16px 0;">Activar cuenta</a>
+          <p style="font-size: 14px; color: #555;">O copia y pega este enlace en tu navegador:</p>
+          <p style="word-break: break-all; font-size: 13px;"><a href="${verifyUrl}">${verifyUrl}</a></p>
+          <p style="color: #888; font-size: 12px;">Este enlace es válido por tiempo limitado.</p>
+        </div>
+      `
     },
     recipients: {
       to: [{ address: email }]
