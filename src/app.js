@@ -35,6 +35,16 @@ app.use('/api/reports', require('./routes/reports'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/actividades', require('./routes/activity'));
 
+
+if (process.env.NODE_ENV === 'production') {
+  const staticPath = path.join(__dirname, 'dist'); // Ajusta según dónde esté tu build
+  app.use(express.static(staticPath));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
+}
+
 // Crear servidor HTTP para usar con WebSocket
 const server = http.createServer(app);
 
