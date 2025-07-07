@@ -119,11 +119,17 @@ const register = async (req, res) => {
     const token = crypto.randomBytes(32).toString('hex');
     const tokenExpiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutos
 
+    const allowedRoles = ['admin', 'supervisor', 'cajero', 'almacenero'];
+    const userRole = (rol || 'cajero').toLowerCase();
+    if (!allowedRoles.includes(userRole)) {
+      return res.status(400).json({ message: 'Rol no permitido' });
+    }
+
     await pool.query(
       `INSERT INTO pending_users 
       (correo_electronico, password, nombre, apellido, rol, direccion, token_verificacion, token_expires_at, ultimo_envio)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
-      [correo_electronico, hashed, nombre, apellido, (rol || 'cajero').toLowerCase(), direccion, token, tokenExpiresAt]
+      [correo_electronico, hashed, nombre, apellido, userRole, direccion, token, tokenExpiresAt]
     );
 
     const link = `${process.env.FRONTEND_URL}/verificar?token=${token}`;
